@@ -51,5 +51,5 @@ while True:
     print 'Humidity: ' + str(humidity) + '%'
     print ''
 
-    time.sleep(30)
+    time.sleep(60)
 
