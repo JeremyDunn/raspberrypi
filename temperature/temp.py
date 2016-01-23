@@ -1,6 +1,10 @@
 from smbus import SMBus
 import time
 import sqlite3 as sqlite
+import os
+
+
+dbPath = os.path.dirname(os.path.abspath(__file__)) + '/temp.db'
 
 # I2C globals
 ADDR = 0x27
@@ -11,7 +15,7 @@ deg = u'\N{DEGREE SIGN}'
 
 # sqlite config
 # CREATE TABLE temp_humidity(id INTEGER primary key, datetime DATETIME DEFAULT CURRENT_TIMESTAMP, temp_c REAL NOT NULL, temp_f REAL NOT NULL, humidity INTEGER NOT NULL);
-sqliteCon = sqlite.connect('temp.db')
+sqliteCon = sqlite.connect(dbPath)
 
 
 # Main loop
@@ -46,8 +50,8 @@ while True:
 
     # print
     print datetime
-    print 'Temperature: ' + str(tempC_formatted) + deg + 'C'
-    print 'Temperature: ' + str(tempF_formatted) + deg + 'F'
+    print 'Temperature: ' + str(tempC_formatted) + deg.encode('utf-8') + 'C'
+    print 'Temperature: ' + str(tempF_formatted) + deg.encode('utf-8') + 'F'
     print 'Humidity: ' + str(humidity) + '%'
     print ''
 
